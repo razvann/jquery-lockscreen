@@ -25,9 +25,7 @@
       # Data Attributes
       @.$el.data 'lockscreen-logout', @.config.logout
       @.$el.data 'lockscreen-unlock', @.config.unlock
-      @.$el.data 'lockscreen-logo', @.config.logo
       @.$el.data 'lockscreen-bg', @.config.bg
-      @.$el.data 'lockscreen-avatar', @.config.avatar
 
       # HTML Template
       @.$el.prepend @.config.template

@@ -17,9 +17,7 @@
       this.$el.addClass("lockableScreen");
       this.$el.data('lockscreen-logout', this.config.logout);
       this.$el.data('lockscreen-unlock', this.config.unlock);
-      this.$el.data('lockscreen-logo', this.config.logo);
       this.$el.data('lockscreen-bg', this.config.bg);
-      this.$el.data('lockscreen-avatar', this.config.avatar);
       this.$el.prepend(this.config.template);
       this.$logo = $('.lock-screen .current-user h2 img');
       this.$logo.attr('alt', this.config.app);
