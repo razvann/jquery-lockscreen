@@ -1,19 +1,50 @@
 {
-  "name": "jquery-plugin",
-  "version": "0.0.0-ignored",
+  "name": "lockscreen",
+  "title": "Lockscreen",
+  "description": "Javascript LockScreen for any HTML application.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ducknorris/jquery-lockscreen",
+  "author": {
+    "name": "Catalin Ilinca",
+    "email": "c@talin.ro",
+    "url": "http://www.talin.ro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ducknorris/jquery-lockscreen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ducknorris/jquery-lockscreen/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ducknorris/jquery-lockscreen/blob/master/LICENSE-MIT"
+    }
+  ],
   "engines": {
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt qunit"
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "jquery": ">= 1.9"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-qunit": "~0.2.0",
+    "grunt-bump": "~0.0.11",
+    "grunt-coffeelint": "~0.0.7",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-watch": "~0.4.0",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt": "~0.4.4"
-  }
+    "grunt-contrib-jasmine": "~0.5.1",
+    "grunt-contrib-uglify": "~0.2.6",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-shell": "~0.5.0"
+  },
+  "keywords": [
+    "jquery",
+    "awesome",
+    "lockscreen"
+  ]
 }

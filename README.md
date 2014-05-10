@@ -1,4 +1,4 @@
-# LockScreen
+# Lockscreen
 
 Javascript LockScreen for any HTML application.
 
