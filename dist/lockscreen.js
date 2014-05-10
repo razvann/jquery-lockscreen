@@ -51,7 +51,7 @@
     avatar: 'http://jquery-lockscreen.s3.amazonaws.com/current-user.png',
     placeholder: 'type password',
     unlockMe: "I'm here. Let me in!",
-    template: '<div class="lock-screen">\
+    template: '<div class="lock-screen" style="display: none">\
         <div class="current-user">\
           <h2><img alt="" src=""></h2>\
           <span><img alt="" height="80" src="" width="80"></span>\

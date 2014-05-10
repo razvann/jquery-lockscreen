@@ -29,7 +29,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "jquery": ">= 1.9"
+    "jquery": ">= 1.9",
+    "jquery.cookie": ">= 1.4.1"
   },
   "devDependencies": {
     "grunt-bump": "~0.0.11",

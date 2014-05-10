@@ -48,4 +48,5 @@ describe "jQuery#lockscreen", ->
   it "should have HTML template Unlock button in place", ->
     expect(@.body.lockScreen().find('.lock-screen .current-user .unlock-me').html()).toEqual "I'm here. Let me in!"
 
-
+  it "should have be hidden by default", ->
+    expect(@.body.lockScreen().find('.lock-screen').is(':hidden')).toBe true

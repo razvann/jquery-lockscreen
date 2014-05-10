@@ -1,14 +1,24 @@
 #
-# lockscreen
+# LockScreen
 # https://github.com/ducknorris/jquery-lockscreen
 #
 # Copyright (c) 2014 Catalin Ilinca
 # Licensed under the MIT license.
 #
-
+# ------------------------------------------------
+#
+# This plugin is depending on jQuery Cookie Plugin
+# jQuery Cookie Plugin v1.4.1
+# https://github.com/carhartl/jquery-cookie
+#
+# Copyright 2013 Klaus Hartl
+# Released under the MIT license
+#
+# ------------------------------------------------
+#
 # Default HTML Outpout Template
 #
-# <div class="lock-screen">
+# <div class="lock-screen" style="display: none">
 #   <div class="current-user">
 #     <h2><img alt="__APP__" src="__LOGO__"></h2>
 #     <span><img alt="__APP__" height="80" src="__AVATAR__" width="80"></span>
@@ -79,7 +89,7 @@
     avatar: 'http://jquery-lockscreen.s3.amazonaws.com/current-user.png'
     placeholder: 'type password'
     unlockMe: "I'm here. Let me in!"
-    template: '<div class="lock-screen">
+    template: '<div class="lock-screen" style="display: none">
         <div class="current-user">
           <h2><img alt="" src=""></h2>
           <span><img alt="" height="80" src="" width="80"></span>
