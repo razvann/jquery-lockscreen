@@ -40,20 +40,20 @@
       @.$el.data 'original-title', window.document.title
       _originalTitle   = @.$el.data('original-title')
       window._timeoutInterval = @.config.timeout
-      _lockScreen      = @lockScreen
-      _locked          = @.config.locked
+      window._lockScreenFn    = @lockScreen
+      window._locked          = @.config.locked
 
       @updateHtml()
-      @.$lockScreen = $('.lock-screen')
-      @.$passwordField = $('.lock-screen .current-user .password-field')
-      @.$unlockMe = $('.lock-screen .current-user .unlock-me')
+      window._lockScreen    = $('.lock-screen')
+      window._passwordField = $('.lock-screen .current-user .password-field')
+      window._unlockMe      = $('.lock-screen .current-user .unlock-me')
 
-      @lockScreen(_locked) if $.cookie('locked') == 'yes'
+      @lockScreen() if $.cookie('locked') == 'yes'
 
       @logout() if $('.lock-screen').length == 0
 
       window._timeout = setTimeout ->
-        _lockScreen()
+        window._lockScreenFn()
         return
       , window._timeoutInterval
 
@@ -86,22 +86,20 @@
       @.$unlockMe.html @.config.unlockMe
       return
 
-    lockScreen: (lockTitle)->
-      window.document.title = lockTitle
-      @.$passwordField.focus()
-      @.$lockScreen.fadeIn()
+    lockScreen: ->
+      window.document.title = window._locked
+      window._passwordField.focus()
+      window._lockScreen.fadeIn()
       return
 
     guard: ->
-      _this            = @
-      _$lockScreen     = @.$lockScreen
-
+      _this = @
       $(document).on 'mousemove', () ->
         _this.config.logout() if $('.lock-screen').length == 0
         clearTimeout window._timeout
-        if _$lockScreen.is(':hidden')
+        if window._lockScreen.is(':hidden')
           window._timeout = setTimeout ->
-            _lockScreen(_locked)
+            window._lockScreenFn()
             $.cookie('locked', 'yes')
             return
           , window._timeoutInterval

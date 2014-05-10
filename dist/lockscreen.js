@@ -8,27 +8,27 @@
   var lockScreen;
   lockScreen = {
     init: function(el, config) {
-      var _lockScreen, _locked, _originalTitle;
+      var _originalTitle;
       this.el = el;
       this.$el = $(el);
       this.config = $.extend({}, $.fn.lockScreen.defaults, config);
       this.$el.data('original-title', window.document.title);
       _originalTitle = this.$el.data('original-title');
       window._timeoutInterval = this.config.timeout;
-      _lockScreen = this.lockScreen;
-      _locked = this.config.locked;
+      window._lockScreenFn = this.lockScreen;
+      window._locked = this.config.locked;
       this.updateHtml();
-      this.$lockScreen = $('.lock-screen');
-      this.$passwordField = $('.lock-screen .current-user .password-field');
-      this.$unlockMe = $('.lock-screen .current-user .unlock-me');
+      window._lockScreen = $('.lock-screen');
+      window._passwordField = $('.lock-screen .current-user .password-field');
+      window._unlockMe = $('.lock-screen .current-user .unlock-me');
       if ($.cookie('locked') === 'yes') {
-        this.lockScreen(_locked);
+        this.lockScreen();
       }
       if ($('.lock-screen').length === 0) {
         this.logout();
       }
       window._timeout = setTimeout(function() {
-        _lockScreen();
+        window._lockScreenFn();
       }, window._timeoutInterval);
       this.guard();
     },
@@ -48,23 +48,22 @@
       this.$unlockMe = $('.lock-screen .current-user .unlock-me');
       this.$unlockMe.html(this.config.unlockMe);
     },
-    lockScreen: function(lockTitle) {
-      window.document.title = lockTitle;
-      this.$passwordField.focus();
-      this.$lockScreen.fadeIn();
+    lockScreen: function() {
+      window.document.title = window._locked;
+      window._passwordField.focus();
+      window._lockScreen.fadeIn();
     },
     guard: function() {
-      var _$lockScreen, _this;
+      var _this;
       _this = this;
-      _$lockScreen = this.$lockScreen;
       return $(document).on('mousemove', function() {
         if ($('.lock-screen').length === 0) {
           _this.config.logout();
         }
         clearTimeout(window._timeout);
-        if (_$lockScreen.is(':hidden')) {
+        if (window._lockScreen.is(':hidden')) {
           window._timeout = setTimeout(function() {
-            _lockScreen(_locked);
+            window._lockScreenFn();
             $.cookie('locked', 'yes');
           }, window._timeoutInterval);
         }
