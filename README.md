@@ -1,4 +1,4 @@
-# Lockscreen
+# Lockscreen [![Build Status](https://travis-ci.org/ducknorris/jquery-lockscreen.svg?branch=master)](https://travis-ci.org/ducknorris/jquery-lockscreen)
 
 Javascript LockScreen for any HTML application.
 
