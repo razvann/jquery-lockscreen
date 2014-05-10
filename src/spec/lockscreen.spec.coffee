@@ -48,17 +48,4 @@ describe "jQuery#lockscreen", ->
   it "should have HTML template Unlock button in place", ->
     expect(@.body.lockScreen().find('.lock-screen .current-user .unlock-me').html()).toEqual "I'm here. Let me in!"
 
-  # it "should insert lock-screen-wrapper", ->
-  #   expect(@.body.lockScreen().find('.lock-screen').html()).toEqual '
-  #     <div class="current-user">
-  #       <h2><img alt="jQuery LockScreen" src="/assets/admin/logo.png"></h2>
-  #       <img alt="John Doe" height="80" src="http://gravatar.com/avatar/bf9a49c89790c65e6685c00a6bd00882.jpg" width="80">
-  #       <h4>
-  #         Catalin Ilinca
-  #         <span class="fa fa-question-circle darkGrey info" data-rel="tooltip" title="" data-original-title="Enter your password and hit ENTER."></span>
-  #       </h4>
-  #       <input autofocus="" class="input-large col-xs 12 password-field error" placeholder="type password" type="password" style="">
-  #       <div class="clearfix"></div>
-  #       <button class="btn btn-primary col-xs-12 unlock-me">I\'m here. Let me in!</button>
-  #     </div>'
 

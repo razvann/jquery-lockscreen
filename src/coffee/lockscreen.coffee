@@ -6,6 +6,18 @@
 # Licensed under the MIT license.
 #
 
+# HTML Outpout default template
+#
+# <div class="lock-screen">
+#   <div class="current-user">
+#     <h2><img alt="__APP__" src="__LOGO__"></h2>
+#     <span><img alt="__APP__" height="80" src="__AVATAR__" width="80"></span>
+#     <h4>__NAME__</h4>
+#     <input autofocus="" class="password-field" placeholder="__PLACEHOLDER__" type="password">
+#     <button class="unlock-me">__UNLOCK__</button>
+#   </div>
+# </div>
+
 (($)->
 
   lockScreen =
@@ -69,11 +81,11 @@
     unlockMe: "I'm here. Let me in!"
     template: '<div class="lock-screen">
         <div class="current-user">
-          <h2><img alt="__APP__" src="__LOGO__"></h2>
-          <span><img alt="__APP__" height="80" src="__AVATAR__" width="80"></span>
-          <h4>__NAME__</h4>
-          <input autofocus="" class="password-field" placeholder="__PLACEHOLDER__" type="password">
-          <button class="unlock-me">__UNLOCK__</button>
+          <h2><img alt="" src=""></h2>
+          <span><img alt="" height="80" src="" width="80"></span>
+          <h4></h4>
+          <input autofocus="" class="password-field" placeholder="" type="password">
+          <button class="unlock-me"></button>
         </div>
       </div>'
 
