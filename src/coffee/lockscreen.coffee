@@ -37,17 +37,32 @@
 
       @.config = $.extend {}, $.fn.lockScreen.defaults, config
 
+      @.$el.data 'original-title', window.document.title
+      _originalTitle   = @.$el.data('original-title')
+      window._timeoutInterval = @.config.timeout
+      _lockScreen      = @lockScreen
+      _locked          = @.config.locked
+
       @updateHtml()
+      @.$lockScreen = $('.lock-screen')
+      @.$passwordField = $('.lock-screen .current-user .password-field')
+      @.$unlockMe = $('.lock-screen .current-user .unlock-me')
+
+      @lockScreen(_locked) if $.cookie('locked') == 'yes'
+
+      @logout() if $('.lock-screen').length == 0
+
+      window._timeout = setTimeout ->
+        _lockScreen()
+        return
+      , window._timeoutInterval
+
+      @guard()
       return
 
     updateHtml: ->
       # CSS Class
       @.$el.addClass "lockableScreen"
-
-      # Data Attributes
-      @.$el.data 'lockscreen-logout', @.config.logout
-      @.$el.data 'lockscreen-unlock', @.config.unlock
-      @.$el.data 'lockscreen-bg', @.config.bg
 
       # HTML Template
       @.$el.prepend @.config.template
@@ -64,13 +79,33 @@
       @.$current_user = $('.lock-screen .current-user h4')
       @.$current_user.html @.config.name
       # Password field
-      @.$password_field = $('.lock-screen .current-user .password-field')
-      @.$password_field.attr 'placeholder', @.config.placeholder
+      @.$passwordField = $('.lock-screen .current-user .password-field')
+      @.$passwordField.attr 'placeholder', @.config.placeholder
       # Unlock button
-      @.$unlock_button = $('.lock-screen .current-user .unlock-me')
-      @.$unlock_button.html @.config.unlockMe
-
+      @.$unlockMe = $('.lock-screen .current-user .unlock-me')
+      @.$unlockMe.html @.config.unlockMe
       return
+
+    lockScreen: (lockTitle)->
+      window.document.title = lockTitle
+      @.$passwordField.focus()
+      @.$lockScreen.fadeIn()
+      return
+
+    guard: ->
+      _this            = @
+      _$lockScreen     = @.$lockScreen
+
+      $(document).on 'mousemove', () ->
+        _this.config.logout() if $('.lock-screen').length == 0
+        clearTimeout window._timeout
+        if _$lockScreen.is(':hidden')
+          window._timeout = setTimeout ->
+            _lockScreen(_locked)
+            $.cookie('locked', 'yes')
+            return
+          , window._timeoutInterval
+        return
 
   $.fn.lockScreen = ->
     obj = Object.create(lockScreen)
@@ -79,10 +114,15 @@
       return
 
   $.fn.lockScreen.defaults =
-    timeout: 60000
-    logout: '/logout'
-    unlock: '/unlock'
+    timeout: 1000
+    logout: ->
+      console.warn 'You have to implement this function!'
+      return
+    unlock: ->
+      console.warn 'You have to implement this function!'
+      return
     app: 'jQuery LockScreen'
+    locked: 'Locked!'
     logo: 'http://jquery-lockscreen.s3.amazonaws.com/logo.png'
     bg: 'http://jquery-lockscreen.s3.amazonaws.com/lock-screen.jpg'
     name: 'John Doe'

@@ -88,7 +88,7 @@ module.exports = (grunt)->
     jasmine:
       options:
         keepRunner: false
-        vendor: "libs/jquery/jquery.js"
+        vendor: ["libs/jquery/jquery.js", "libs/jquery/jquery.cookie.js"]
         specs: "test/*.spec.js"
       src: "dist/<%= pkg.name %>.js"
 

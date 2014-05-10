@@ -8,16 +8,32 @@
   var lockScreen;
   lockScreen = {
     init: function(el, config) {
+      var _lockScreen, _locked, _originalTitle;
       this.el = el;
       this.$el = $(el);
       this.config = $.extend({}, $.fn.lockScreen.defaults, config);
+      this.$el.data('original-title', window.document.title);
+      _originalTitle = this.$el.data('original-title');
+      window._timeoutInterval = this.config.timeout;
+      _lockScreen = this.lockScreen;
+      _locked = this.config.locked;
       this.updateHtml();
+      this.$lockScreen = $('.lock-screen');
+      this.$passwordField = $('.lock-screen .current-user .password-field');
+      this.$unlockMe = $('.lock-screen .current-user .unlock-me');
+      if ($.cookie('locked') === 'yes') {
+        this.lockScreen(_locked);
+      }
+      if ($('.lock-screen').length === 0) {
+        this.logout();
+      }
+      window._timeout = setTimeout(function() {
+        _lockScreen();
+      }, window._timeoutInterval);
+      this.guard();
     },
     updateHtml: function() {
       this.$el.addClass("lockableScreen");
-      this.$el.data('lockscreen-logout', this.config.logout);
-      this.$el.data('lockscreen-unlock', this.config.unlock);
-      this.$el.data('lockscreen-bg', this.config.bg);
       this.$el.prepend(this.config.template);
       this.$logo = $('.lock-screen .current-user h2 img');
       this.$logo.attr('alt', this.config.app);
@@ -27,10 +43,32 @@
       this.$avatar.attr('src', this.config.avatar);
       this.$current_user = $('.lock-screen .current-user h4');
       this.$current_user.html(this.config.name);
-      this.$password_field = $('.lock-screen .current-user .password-field');
-      this.$password_field.attr('placeholder', this.config.placeholder);
-      this.$unlock_button = $('.lock-screen .current-user .unlock-me');
-      this.$unlock_button.html(this.config.unlockMe);
+      this.$passwordField = $('.lock-screen .current-user .password-field');
+      this.$passwordField.attr('placeholder', this.config.placeholder);
+      this.$unlockMe = $('.lock-screen .current-user .unlock-me');
+      this.$unlockMe.html(this.config.unlockMe);
+    },
+    lockScreen: function(lockTitle) {
+      window.document.title = lockTitle;
+      this.$passwordField.focus();
+      this.$lockScreen.fadeIn();
+    },
+    guard: function() {
+      var _$lockScreen, _this;
+      _this = this;
+      _$lockScreen = this.$lockScreen;
+      return $(document).on('mousemove', function() {
+        if ($('.lock-screen').length === 0) {
+          _this.config.logout();
+        }
+        clearTimeout(window._timeout);
+        if (_$lockScreen.is(':hidden')) {
+          window._timeout = setTimeout(function() {
+            _lockScreen(_locked);
+            $.cookie('locked', 'yes');
+          }, window._timeoutInterval);
+        }
+      });
     }
   };
   $.fn.lockScreen = function() {
@@ -41,10 +79,15 @@
     });
   };
   return $.fn.lockScreen.defaults = {
-    timeout: 60000,
-    logout: '/logout',
-    unlock: '/unlock',
+    timeout: 1000,
+    logout: function() {
+      console.warn('You have to implement this function!');
+    },
+    unlock: function() {
+      console.warn('You have to implement this function!');
+    },
     app: 'jQuery LockScreen',
+    locked: 'Locked!',
     logo: 'http://jquery-lockscreen.s3.amazonaws.com/logo.png',
     bg: 'http://jquery-lockscreen.s3.amazonaws.com/lock-screen.jpg',
     name: 'John Doe',
