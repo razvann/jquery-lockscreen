@@ -6,7 +6,7 @@
 # Licensed under the MIT license.
 #
 
-# HTML Outpout default template
+# Default HTML Outpout Template
 #
 # <div class="lock-screen">
 #   <div class="current-user">
