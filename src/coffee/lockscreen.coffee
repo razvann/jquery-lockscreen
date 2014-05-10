@@ -112,7 +112,7 @@
       return
 
   $.fn.lockScreen.defaults =
-    timeout: 1000
+    timeout: 60000
     logout: ->
       console.warn 'You have to implement this function!'
       return
