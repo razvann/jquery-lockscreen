@@ -90,6 +90,7 @@
       window.document.title = window._locked
       window._passwordField.focus()
       window._lockScreen.fadeIn()
+      $.cookie('locked', 'yes')
       return
 
     guard: ->
@@ -100,7 +101,6 @@
         if window._lockScreen.is(':hidden')
           window._timeout = setTimeout ->
             window._lockScreenFn()
-            $.cookie('locked', 'yes')
             return
           , window._timeoutInterval
         return

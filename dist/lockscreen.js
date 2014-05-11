@@ -52,6 +52,7 @@
       window.document.title = window._locked;
       window._passwordField.focus();
       window._lockScreen.fadeIn();
+      $.cookie('locked', 'yes');
     },
     guard: function() {
       var _this;
@@ -64,7 +65,6 @@
         if (window._lockScreen.is(':hidden')) {
           window._timeout = setTimeout(function() {
             window._lockScreenFn();
-            $.cookie('locked', 'yes');
           }, window._timeoutInterval);
         }
       });
