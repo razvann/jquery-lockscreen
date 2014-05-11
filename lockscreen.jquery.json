@@ -1,7 +1,7 @@
 {
   "name": "lockscreen",
   "title": "Lockscreen",
-  "description": "Javascript LockScreen for any HTML application.",
+  "description": "Javascript LockScreen for any website / web application.",
   "version": "0.1.0",
   "homepage": "https://github.com/ducknorris/jquery-lockscreen",
   "author": {

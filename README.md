@@ -1,6 +1,6 @@
 # Lockscreen [![Build Status](https://travis-ci.org/ducknorris/jquery-lockscreen.svg?branch=master)](https://travis-ci.org/ducknorris/jquery-lockscreen)
 
-Javascript LockScreen for any HTML application.
+Javascript LockScreen for any website / web application.
 
 ## Getting Started
 Download the [production version][min] or the [development version][max].
